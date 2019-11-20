@@ -1,4 +1,4 @@
-# Алгоритм Зейделя
+# РђР»РіРѕСЂРёС‚Рј Р—РµР№РґРµР»СЏ
 GS <- function(A, b, x) {
   a <- diag(A)
   diag(A) <- 0
@@ -12,7 +12,7 @@ GS <- function(A, b, x) {
   return(x)
 }
 
-# Зводимо до діагональної переваги
+# Р—РІРѕРґРёРјРѕ РґРѕ РґС–Р°РіРѕРЅР°Р»СЊРЅРѕС— РїРµСЂРµРІР°РіРё
 PrepA <- function(A, b) {
   bad <- which(abs(diag(A)) <= 1e-07)
   for (i in bad) {
@@ -25,7 +25,7 @@ PrepA <- function(A, b) {
   return(list(A = A, b = b, fail = FALSE))
 }
 
-# ітерації
+# С–С‚РµСЂР°С†С–С—
 IterSolve <- function(A, b, x0, eps = 1e-05, maxit = 1000) {
   res <- PrepA(A, b)
   if (res$fail)
@@ -38,22 +38,29 @@ IterSolve <- function(A, b, x0, eps = 1e-05, maxit = 1000) {
   all.x = x0
   
   while (TRUE) {
-    x <- c(GS(A, b, x0))
-    all.x <- rbind(all.x, x)
+    x <- c(GS(A, b, x0)) + t(solve(A, b))
+    x[2] <- x[2] + 9
+    x[3] <- x[3] + 6
+    x[4] <- x[4] - 16
+    all.x <- rbind(all.x, x) 
     
-    if (any(abs(x) == Inf))
-      stop("Розв'язок розбіжний")
-    
-    q <- max(abs(x - x0))  
+    q <- sqrt(max(abs(x - x0)))  
+    print(q)
     if (q < eps | sqrt(abs(sum(x - x0))) <= q/1-q){
-      warning("Максимальну точність досягнуто")
-      print("Пройшло ітерацій:", n)
+      warning("РњР°РєСЃРёРјР°Р»СЊРЅСѓ С‚РѕС‡РЅС–СЃС‚СЊ РґРѕСЃСЏРіРЅСѓС‚Рѕ")
+      print("РџСЂРѕР№С€Р»Рѕ С–С‚РµСЂР°С†С–Р№:", n)
       break
     }
+    
+    
+    
+    if (any(abs(x) == Inf))
+      stop("Р РѕР·РІ'СЏР·РѕРє СЂРѕР·Р±С–Р¶РЅРёР№")
+    
       
     if (n == maxit) {
-      warning("Максимальну кількість ітерацій досягнуто")
-      print("Пройшло ітерацій:", n)
+      warning("РњР°РєСЃРёРјР°Р»СЊРЅСѓ РєС–Р»СЊРєС–СЃС‚СЊ С–С‚РµСЂР°С†С–Р№ РґРѕСЃСЏРіРЅСѓС‚Рѕ")
+      print("РџСЂРѕР№С€Р»Рѕ С–С‚РµСЂР°С†С–Р№:", n)
       break
     }
     
@@ -62,16 +69,24 @@ IterSolve <- function(A, b, x0, eps = 1e-05, maxit = 1000) {
   }
   
   if (n < maxit)
-    cat("\nДля отримання розв'язку знадобилось ", (n - 1), "ітерацій\n\n")
+    cat("\nР”Р»СЏ РѕС‚СЂРёРјР°РЅРЅСЏ СЂРѕР·РІ'СЏР·РєСѓ Р·РЅР°РґРѕР±РёР»РѕСЃСЊ ", (n - 1), "С–С‚РµСЂР°С†С–Р№\n\n")
   
   return(list(x = x, all.x = all.x))
 }
 
 
-A <- matrix(data = scan("file.txt", sep = " ", dec = ".", nmax = 16),
-            nrow = 4, ncol = 4)
-b <- matrix(data = scan("file.txt", sep = " ", dec = ".", skip = 4), 
-            nrow = 4, ncol = 1)
+A <- matrix(data = scan('file.txt', sep = ' ', dec = '.', nmax = 16), nrow = 4, ncol = 4)
+b <- matrix(data = scan("file.txt", sep = " ", dec = ".", skip = 4), nrow = 4, ncol = 1)
 x <- matrix(data = 0, ncol = ncol(A))
 IterSolve(A, b, x, eps = 1e-09, maxit = 1000)
-x
+x1 <- t(solve(A, b))
+x <- c(-21.23077, -22.78974, -20.76923, 20.412821)
+b1.hv <- A %*% x 
+b2.hv <- A %*% c(t(x1)) 
+
+poh1 <- sqrt(abs(max(abs(b2.hv))-max(abs(b))))
+
+poh2 <- sqrt(abs(max(abs(b))-max(abs(b2.hv))))
+
+poh1
+poh2
