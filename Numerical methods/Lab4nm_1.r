@@ -1,9 +1,9 @@
 A <- matrix(data = scan('file.txt', sep = ' ', dec = '.', nmax = 9), nrow = 3, ncol = 3)
 
 if(isSymmetric(A)){
-  print("ћатриц¤ симетрична")
+  print("матриця симетрична")
 }else{
-  print("ƒл¤ методу поворот≥в якоб≥ потр≥бна симетрична матриц¤! ћожлив≥ нев≥рн≥ розв'¤зки")
+  print("для методу поворотів якобі потрібна симетрична матриця! можливі невірні розв'язки")
 }
 
 PovorotJacobi <- function(A){
@@ -12,7 +12,7 @@ PovorotJacobi <- function(A){
   diag(L) <- 0 
   #опорний елемент
   a.i.j <- max(L)
-  #«находимо ≥ндекси ≥ та j
+  #знаходимо індекси і та j
   i <- which(L == a.i.j, T)[,1]
   j <- which(L == a.i.j, T)[,2]
   
