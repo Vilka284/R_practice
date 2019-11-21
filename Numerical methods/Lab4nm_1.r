@@ -1,5 +1,7 @@
 A <- matrix(data = scan('file.txt', sep = ' ', dec = '.', nmax = 9), nrow = 3, ncol = 3)
 
+#eigen values - Jacobi rotations
+
 if(isSymmetric(A)){
   print("матриця симетрична")
 }else{

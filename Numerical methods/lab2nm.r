@@ -1,3 +1,5 @@
+# Orthogonal algorithm
+
 A <- matrix(data = scan("file.txt", sep = " ", dec = ".", nmax = 16),
            nrow = 4, ncol = 4)
 b <- matrix(data = scan("file.txt", sep = " ", dec = ".", skip = 4), 

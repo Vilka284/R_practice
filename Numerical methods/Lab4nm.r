@@ -1,6 +1,8 @@
 A <- matrix(data = scan('file.txt', sep = ' ', dec = '.', nmax = 16), nrow = 4, ncol = 4)
 eps <- 1e-06
 
+#eigen values - PM algorithm
+
 PMsolve<-function(A = A, eps = eps){
   y0 <- matrix(data = 1, nrow = nrow(A), ncol = 1)
   l1 <- 999

@@ -1,3 +1,5 @@
+#Zeidel algorithm
+
 # Алгоритм Зейделя
 GS <- function(A, b, x) {
   a <- diag(A)

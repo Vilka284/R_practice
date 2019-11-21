@@ -1,5 +1,7 @@
 library(Deriv)
 
+#Combine method - (chordes and tangent lines)
+
 equation <- "log10(x) - 7/(2*x + 6)"
 
 check1 <- Deriv(equation)
