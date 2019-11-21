@@ -44,10 +44,10 @@ solveNLSystem <- function(){
     
     F.x <- func(x, f)
     
-    J.x <- jac(x, J.pop)
+    J.x <- jac(x, J)
     #Приведення до числа
-    for (i in 1:nrow(J)) {
-      for (j in 1:ncol(J)) {
+    for (i in 1:nrow(J.x)) {
+      for (j in 1:ncol(J.x)) {
         J.pop[i, j] <- as.numeric(J.x[i, j])
       }
     }
@@ -89,7 +89,7 @@ func <- function(x, equations){
   "
  x1 <- N$x1
  x2 <- N$x2
- x3 <- N$x3
+ #x3 <- N$x3
   # x4 <- N$x4
   # x5 <- N$x5
   # x6 <- N$x6
@@ -125,7 +125,7 @@ jac <- function(x, J){
   "
   x1 <- N$x1
   x2 <- N$x2
-  x3 <- N$x3
+  #x3 <- N$x3
   # x4 <- N$x4
   # x5 <- N$x5
   # x6 <- N$x6
