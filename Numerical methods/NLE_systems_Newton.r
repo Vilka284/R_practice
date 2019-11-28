@@ -5,12 +5,12 @@ eps <- 1e-10
 
 
 solveNLSystem <- function(){
-  n <- as.integer(readline(prompt = "Ç³ ñê³ëüêîõ ð³âíÿíü ñêëàäàºòüñÿ ñèñòåìà: "))
-  m <- as.integer(readline(prompt = "Ñê³ëüêè çì³ííèõ ô³ãóðóº â ñèñòåìàõ: "))
-  print("Ââåä³òü íàçâè çì³ííèõ (íàïðèêëàä x1, x2, x3): ")
+  n <- as.integer(readline(prompt = "Ð—Ñ– ÑÐºÑ–Ð»ÑŒÐºÐ¾Ñ… Ñ€Ñ–Ð²Ð½ÑÐ½ÑŒ ÑÐºÐ»Ð°Ð´Ð°Ñ”Ñ‚ÑŒÑÑ ÑÐ¸ÑÑ‚ÐµÐ¼Ð°: "))
+  m <- as.integer(readline(prompt = "Ð¡ÐºÑ–Ð»ÑŒÐºÐ¸ Ð·Ð¼Ñ–Ð½Ð½Ð¸Ñ… Ñ„Ñ–Ð³ÑƒÑ€ÑƒÑ” Ð² ÑÐ¸ÑÑ‚ÐµÐ¼Ð°Ñ…: "))
+  print("Ð’Ð²ÐµÐ´Ñ–Ñ‚ÑŒ Ð½Ð°Ð·Ð²Ð¸ Ð·Ð¼Ñ–Ð½Ð½Ð¸Ñ… (Ð½Ð°Ð¿Ñ€Ð¸ÐºÐ»Ð°Ð´ x1, x2, x3): ")
   var.names <- c()
   for (i in 1:m) {
-    var.names[i] <- readline(prompt = cat("Çì³ííà ", i, ":"))
+    var.names[i] <- readline(prompt = cat("Ð—Ð¼Ñ–Ð½Ð½Ð° ", i, ":"))
   }
   
   equations <- c()2
@@ -18,19 +18,19 @@ solveNLSystem <- function(){
   x <- c()
   
   for(i in  1:n){
-    equations[i] <- readline(prompt = cat("Ð³âíÿííÿ ", i, ":"))
+    equations[i] <- readline(prompt = cat("Ð Ñ–Ð²Ð½ÑÐ½Ð½Ñ ", i, ":"))
   }
   
-  cat("Ùîá ïî÷àòè ðîáîòó ïðîãðàìè ââåä³òü ïî÷àòêîâå íàáëèæåííÿ ç ", n, " åëåìåíò³â")
+  cat("Ð©Ð¾Ð± Ð¿Ð¾Ñ‡Ð°Ñ‚Ð¸ Ñ€Ð¾Ð±Ð¾Ñ‚Ñƒ Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¸ Ð²Ð²ÐµÐ´Ñ–Ñ‚ÑŒ Ð¿Ð¾Ñ‡Ð°Ñ‚ÐºÐ¾Ð²Ðµ Ð½Ð°Ð±Ð»Ð¸Ð¶ÐµÐ½Ð½Ñ Ð· ", n, " ÐµÐ»ÐµÐ¼ÐµÐ½Ñ‚Ñ–Ð²")
   for(i in 1:n){
-    x[i] <- as.double(readline(prompt = cat(i, " åëåìåíò äëÿ ", i, " ð³âíÿííÿ:")))
+    x[i] <- as.double(readline(prompt = cat(i, " ÐµÐ»ÐµÐ¼ÐµÐ½Ñ‚ Ð´Ð»Ñ ", i, " Ñ€Ñ–Ð²Ð½ÑÐ½Ð½Ñ:")))
   }
   
   f <- equations
   J <- matrix(data = 0, nrow = length(equations), ncol = as.integer(n))
   J.pop <- matrix(data = 0, nrow = length(equations), ncol = as.integer(n))
   
-  #Íàïîâíþºìî ÿêîá³àí
+  #ÐÐ°Ð¿Ð¾Ð²Ð½ÑŽÑ”Ð¼Ð¾ ÑÐºÐ¾Ð±Ñ–Ð°Ð½
   # df/dx[i]
   for (i in 1:nrow(J)) {
     for (j in 1:ncol(J)) {
@@ -46,7 +46,7 @@ solveNLSystem <- function(){
     F.x <- func(x, f)
     
     J.x <- jac(x, J)
-    #Ïðèâåäåííÿ äî ÷èñëà
+    #ÐŸÑ€Ð¸Ð²ÐµÐ´ÐµÐ½Ð½Ñ Ð´Ð¾ Ñ‡Ð¸ÑÐ»Ð°
     for (i in 1:nrow(J.x)) {
       for (j in 1:ncol(J.x)) {
         J.pop[i, j] <- as.numeric(J.x[i, j])
@@ -65,7 +65,7 @@ solveNLSystem <- function(){
 func <- function(x, equations){
   "
   !
-  Äîñòóï äî çì³ííèõ ÷åðåç ³ìåíà
+  Ð”Ð¾ÑÑ‚ÑƒÐ¿ Ð´Ð¾ Ð·Ð¼Ñ–Ð½Ð½Ð¸Ñ… Ñ‡ÐµÑ€ÐµÐ· Ñ–Ð¼ÐµÐ½Ð°
   !
   "
   N <- vector(mode = "list", length = length(x))
@@ -82,7 +82,7 @@ func <- function(x, equations){
   }
   
   "
-  Îá÷èñëåííÿ ð³âíÿííÿ
+  ÐžÐ±Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ñ Ñ€Ñ–Ð²Ð½ÑÐ½Ð½Ñ
     UNCOMMENT NECESSARY !
     sorry for shitcode :(
     
@@ -118,7 +118,7 @@ jac <- function(x, J){
   }
   
   "
-  Îá÷èñëåííÿ ð³âíÿííÿ
+  ÐžÐ±Ñ‡Ð¸ÑÐ»ÐµÐ½Ð½Ñ Ñ€Ñ–Ð²Ð½ÑÐ½Ð½Ñ
     UNCOMMENT NECESSARY !
     sorry for shitcode :(
     
