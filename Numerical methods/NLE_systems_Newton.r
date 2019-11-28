@@ -13,7 +13,8 @@ solveNLSystem <- function(){
     var.names[i] <- readline(prompt = cat("Çì³ííà ", i, ":"))
   }
   
-  equations <- c()
+  equations <- c()2
+  2
   x <- c()
   
   for(i in  1:n){
