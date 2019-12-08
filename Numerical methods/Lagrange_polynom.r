@@ -1,6 +1,12 @@
 n <- 9
-x<-c(5, 7, 11, 12, 22)
-y<-c(23, 18, 15, 16, 20)
+x <- c(-10, -7, -6, -5, -4, -3,  -1, 0, 1, 2, 6, 7, 8, 9)
+y<- sin(x)
+
+
+
+
+
+
 
 LagrangeInterpol <- function(x, y, n, xk){
     yk <- 0
@@ -29,4 +35,4 @@ plot(x, y, type = 'b')
 
 f <- splinefun(x, y, method = "natural")
 
-curve(f(x), 0, 22, col = "darkblue", add = TRUE)
+curve(f(x), -10, 10, col = "darkblue", add = TRUE)
